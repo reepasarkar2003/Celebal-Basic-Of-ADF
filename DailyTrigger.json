@@ -1,0 +1,13 @@
+
+{
+    "name": "DailyTrigger",
+    "properties": {
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Day",
+                "interval": 1
+            }
+        }
+    }
+}

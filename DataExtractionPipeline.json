@@ -1,0 +1,32 @@
+
+{
+    "name": "DataExtractionPipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "CopyFromFTPToSQL",
+                "type": "Copy",
+                "inputs": [
+                    {
+                        "referenceName": "FTPSourceDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AzureSQLSinkDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "FtpSource"
+                    },
+                    "sink": {
+                        "type": "SqlSink"
+                    }
+                }
+            }
+        ]
+    }
+}

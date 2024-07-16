@@ -1,0 +1,57 @@
+
+{
+    "name": "IncrementalLoadPipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "GetNewFiles",
+                "type": "GetMetadata",
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "FTPSourceDataset",
+                        "type": "DatasetReference"
+                    },
+                    "fieldList": ["ChildItems"]
+                }
+            },
+            {
+                "name": "FilterProcessedFiles",
+                "type": "Filter",
+                "typeProperties": {
+                    "items": {
+                        "value": "@activity('GetNewFiles').output.childItems",
+                        "type": "Expression"
+                    },
+                    "condition": {
+                        "value": "@not(contains(item().name, 'processed'))",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "CopyNewFilesToSQL",
+                "type": "Copy",
+                "inputs": [
+                    {
+                        "referenceName": "FTPSourceDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AzureSQLSinkDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "FtpSource"
+                    },
+                    "sink": {
+                        "type": "SqlSink"
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+
+
+{
+    "name": "FTPLinkedService",
+    "properties": {
+        "type": "FtpServer",
+        "typeProperties": {
+            "host": "ftp.example.com",
+            "port": 21,
+            "enableSsl": false,
+            "authenticationType": "Basic",
+            "userName": "john_doe",
+            "password": {
+                "type": "SecureString",
+                "value": "PassP@1234!"
+            }
+        }
+    }
+}
